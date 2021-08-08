@@ -1,7 +1,11 @@
 package main
 
-func main() {
+type Tag struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
 
+func main() {
 	// runSlices()
 	// runArrays()
 	// runPointers()
@@ -11,6 +15,6 @@ func main() {
 	// runAdditionalModules()
 	// runMethods()
 	// runLoops()
-	runStrings()
-
+	// runStrings()
+	runGinApi()
 }
