@@ -16,7 +16,8 @@ func main() {
 	// runMethods()
 	// runLoops()
 	// runStrings()
-	runInteraces()
+	// runInteraces()
 	// runGinApi()
+	runJwt()
 
 }

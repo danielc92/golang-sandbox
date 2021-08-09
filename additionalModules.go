@@ -7,6 +7,9 @@ import (
 	"time"
 )
 
+func DelayedFunc() {
+	fmt.Println("Daniel was here.")
+}
 func runAdditionalModules() {
 	// TIME MODULE
 	fmt.Println("Get datetime now", time.Now())
@@ -17,6 +20,13 @@ func runAdditionalModules() {
 	fmt.Println("Adding x minutes", time.Now().Add(time.Minute*23))
 	fmt.Println("Adding x seconds", time.Now().Add(time.Second*50))
 	fmt.Println("Get location", time.Now().Location())
+	
+	today := time.Now()
+
+	if (today.Month() == time.August) {fmt.Println("correct")}
+
+	future := time.Date(2021,12,20,10,5,1,0, time.Now().Local().Location())
+	fmt.Println("Future: ",time.Until(future).Hours())
 
 	// MATH MODULE
 	fmt.Println("Finding the ceiling (rounding up)", math.Ceil(3.44))
