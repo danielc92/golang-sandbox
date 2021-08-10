@@ -6,6 +6,7 @@ type Tag struct {
 }
 
 func main() {
+
 	// runSlices()
 	// runArrays()
 	// runPointers()
@@ -17,7 +18,8 @@ func main() {
 	// runLoops()
 	// runStrings()
 	// runInteraces()
-	runGinApi()
 	// runJwt()
+	// runGinApi()
+	runEnv()
 
 }
