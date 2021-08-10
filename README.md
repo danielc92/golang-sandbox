@@ -16,3 +16,13 @@ This repo covers;
 - errors module
 - time module
 - math module
+- environment
+- json web tokens (jwt)
+
+### Running
+
+`go run .`
+
+### Building
+
+`go build`

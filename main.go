@@ -19,7 +19,7 @@ func main() {
 	// runStrings()
 	// runInteraces()
 	// runJwt()
-	// runGinApi()
-	runEnv()
+	runGinApi()
+	// runEnv()
 
 }

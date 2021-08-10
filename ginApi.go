@@ -31,9 +31,11 @@ func DanielsCustomMiddleware() gin.HandlerFunc {
 }
 
 func runGinApi() {
+
 	r := gin.Default()
 
 	r.Use(DanielsCustomMiddleware())
+	// r.Use(gin.Logger())
 
 	r.GET("/ping", func(c *gin.Context) {
 		// res := []Tag{
@@ -55,5 +57,6 @@ func runGinApi() {
 		
 		c.JSON(http.StatusOK, res)
 	})
+	
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
