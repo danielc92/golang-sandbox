@@ -18,7 +18,6 @@ func runJwt() {
 		"iat": time.Now().UTC().Unix(),
 		})
 
-	
 	tokenString, err := token.SignedString(hmacSecret)
 
 	fmt.Println("Created: ",tokenString)
