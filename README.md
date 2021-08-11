@@ -26,3 +26,13 @@ This repo covers;
 ### Building
 
 `go build`
+
+### Docker/Postgres commands
+
+```
+"start": "docker run --name some-pg -p 3008:5432 -e POSTGRES_PASSWORD=secret -d postgres",
+"kill": "docker kill some-pg && docker rm some-pg",
+"restart": "docker restart some-pg",
+"console": "docker exec -it some-pg psql -U postgres",
+
+```
