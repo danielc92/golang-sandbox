@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +12,20 @@ type Country struct {
 	Lat float32 
 	Name  string
 }
+
+type Student struct {
+	
+		FirstName string 
+		LastName string 
+	
+}
+
+type StudentApiResponse struct {
+	Data []Student `json:"data"`
+	Total int `json:"total"`
+}
+
+
 
 /*
 This middleware creates a flag (authenticated)
@@ -30,17 +45,30 @@ func DanielsCustomMiddleware() gin.HandlerFunc {
 	}
 }
 
+func LoadStudents() []Student {
+	students := []Student{
+		{"DANIEL","CORCORAN"},
+		{"DANIEL","LAY"},
+		{"DANIEL","LUKAS"},
+		{"DANIEL","JULES"},
+		{"SMITH","FIELDING"},
+		{"SMITH","DOWNEY"},
+		{"SMITH","JAN"},
+		{"ANNA","RAY"},
+		{"BELLE","RUFUS"},
+		{"ROBERT","SMITH"},
+	}
+	return students
+}
 func runGinApi() {
 
 	r := gin.Default()
 
-	r.Use(DanielsCustomMiddleware())
+	// r.Use(DanielsCustomMiddleware())
 	// r.Use(gin.Logger())
 
 	r.GET("/ping", func(c *gin.Context) {
-		// res := []Tag{
-		// 	{Name: "Arts", Description: "Tag for arts and crafts."},
-		// }
+
 		res := gin.H{
 			"x":1,
 		}
@@ -58,5 +86,58 @@ func runGinApi() {
 		c.JSON(http.StatusOK, res)
 	})
 	
+
+	r.GET("/students", func(c *gin.Context) {
+
+		students := LoadStudents()
+	
+		firstName := c.Query("firstName")
+	
+		var results []Student
+	
+		for _, s := range students {
+			if (s.FirstName == strings.ToUpper(firstName)) {
+				results = append(results, s)
+			}
+		}
+	
+		 apiResponse := StudentApiResponse{
+				Data: results,
+				Total: len(results),
+			}
+	
+	
+		 
+		c.JSON(http.StatusOK, &apiResponse)
+
+	})
+
+	r.PUT("/students", func(c *gin.Context) {
+
+			oldStudent := Student{
+				"Richard",
+				"Smith",
+			}
+
+			var newStudent Student
+
+			err := c.BindJSON(&newStudent)
+
+			if (err != nil) {
+				c.JSON(http.StatusBadRequest, gin.H{"message": "incorrect body formatt!"})
+				c.Abort()
+			}
+
+			if len(newStudent.FirstName) > 0 {
+				oldStudent.FirstName = newStudent.FirstName
+			}
+			
+			if len(newStudent.LastName) > 0 {
+				oldStudent.LastName = newStudent.LastName
+			}
+
+			c.JSON(http.StatusOK, oldStudent)
+
+	})
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
